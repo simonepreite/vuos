@@ -31,13 +31,13 @@
 #include <sys/epoll.h>
 #include <vumodule.h>
 #include <errno.h>
-#include "../../vnslib/vnslib.h"
+#include "/home/smogdeb/ambiente_sviluppo/vsnlib/vsnlib.h"
 
-VU_PROTOTYPES(unrealvnslib)
+VU_PROTOTYPES(unrealvsnlib)
 
 struct vu_module_t vu_module = {
-	.name = "unrealvnslib",
-	.description = "unrealvnslib: tcp-ip layer for stack unification"
+	.name = "unrealvsnlib",
+	.description = "unrealvsnlib: tcp-ip layer for stack unification"
 };
 
 struct ip_mask{
@@ -54,7 +54,7 @@ const struct ip_mask mask_len[] = {
 };
 
 int fd;
-int vu_unrealvnslib_msocket(const char *path, int domain, int type, int protocol) {
+int vu_unrealvsnlib_msocket(const char *path, int domain, int type, int protocol) {
 	if (path != NULL) {
 		errno = EINVAL;
 		return -1;
@@ -72,7 +72,7 @@ int vu_unrealvnslib_msocket(const char *path, int domain, int type, int protocol
 static struct vuht_entry_t *ht[3];
 static int afs[3] = {AF_INET, AF_INET6, AF_NETLINK};
 
-ssize_t vu_unrealvnslib_sendto(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr, socklen_t addrlen){
+ssize_t vu_unrealvsnlib_sendto(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr, socklen_t addrlen){
 
 		if(fd == sockfd){
 			printk("sendto:%d\n", sockfd);
@@ -82,8 +82,9 @@ ssize_t vu_unrealvnslib_sendto(int sockfd, const void *buf, size_t len, int flag
 	return sendto(sockfd, buf, len, flags,dest_addr, addrlen);
 }
 
-ssize_t vu_unrealvnslib_recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *dest_addr, socklen_t *addrlen){
+ssize_t vu_unrealvsnlib_recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *dest_addr, socklen_t *addrlen){
 		printk("recv:%d\n", sockfd);
+		#if 0
 		if(fd == sockfd){
 			//#if 0
 			struct my_recv_msg{
@@ -127,10 +128,11 @@ ssize_t vu_unrealvnslib_recvfrom(int sockfd, void *buf, size_t len, int flags, s
 			printk("iovlen: %d\n",*iovlen);
 			return s;*/
 		}
+		#endif
 	  return recvfrom(sockfd, buf, len, flags,dest_addr, addrlen);
 }
 
-void *vu_unrealvnslib_init(void) {
+void *vu_unrealvsnlib_init(void) {
 	struct vu_service_t *s = vu_mod_getservice();
 	int i;
 
@@ -153,7 +155,7 @@ void *vu_unrealvnslib_init(void) {
 	return NULL;
 }
 
-int vu_unrealvnslib_fini(void *private) {
+int vu_unrealvsnlib_fini(void *private) {
 	int i;
 	for (i = 0; i < 3; i++) {
 		if (ht[i] && vuht_del(ht[i], 0) == 0)
