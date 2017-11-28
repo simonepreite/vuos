@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/vulib.h
+unistd.h
+-
+sys/utsname.h
+-
+
+/home/smogdeb/ambiente_sviluppo/vuos/cmd/vu_rmmod.c
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+libgen.h
+-
+getopt.h
+-
+vulib.h
+-
+

@@ -31,26 +31,13 @@
 #include <sys/epoll.h>
 #include <vumodule.h>
 #include <errno.h>
-#include "/home/smogdeb/ambiente_sviluppo/vsnlib/vsnlib.h"
+#include <vsnshared.h>
 
 VU_PROTOTYPES(unrealvsnlib)
 
 struct vu_module_t vu_module = {
 	.name = "unrealvsnlib",
 	.description = "unrealvsnlib: tcp-ip layer for stack unification"
-};
-
-struct ip_mask{
-	int i_prefix;
-	char *c_prefix;
-};
-
-/* questa forse è megli definirla nell'header della libreria */
-const struct ip_mask mask_len[] = {
-	{32, "255.255.255.255"},
-	{24, "255.255.255.0"},
-	{16, "255.255.0.0"},
-	{8, "255.0.0.0"}
 };
 
 int fd;
